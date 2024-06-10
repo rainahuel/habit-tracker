@@ -1,0 +1,60 @@
+<div id="schedule-container">
+  <div class="schedule-container">
+    <div class="level">
+      <h1 class="title is-2 level-left">Habit Tracker</h1>
+      <div class="level-right">
+        <p class="subtitle is-4">Total time in habits: {{ formatTime(getTotalTimeAllDays()) }}</p>
+      </div>
+    </div>
+    <div class="has-text-centered">
+      <p>Week of {{ datesOfWeek[0].getDate() }} - {{ datesOfWeek[6].getDate() }}</p>
+    </div>
+    <div class="has-text-centered">
+      <button class="button is-primary" (click)="exportWeek()">Export Week</button>
+    </div>
+    <div class="schedule-content">
+      <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th></th>
+            <th *ngFor="let day of daysOfWeek; let i = index">{{ day }} ({{ datesOfWeek[i].getDate() }})</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let hour of hoursOfDay">
+            <td>{{ hour }}</td>
+            <td *ngFor="let day of daysOfWeek" (click)="onCellClick(day, hour)" [ngStyle]="getCellStyle(day, hour)">
+              {{ habits[day + '-' + hour] || '' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="schedule-total">
+      <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+        <tbody>
+          <tr>
+            <td>Total Time</td>
+            <td *ngFor="let day of daysOfWeek">{{ formatTime(getTotalTime(day)) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="modal" [class.is-active]="showModal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Manage Habit</p>
+        <button class="delete" aria-label="close" (click)="onCloseModal()"></button>
+      </header>
+      <section class="modal-card-body">
+        <app-habit (habitAdded)="onHabitAdded($event)"></app-habit>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-danger" (click)="onHabitRemoved()">Remove Habit</button>
+      </footer>
+    </div>
+  </div>
+</div>

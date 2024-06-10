@@ -1,0 +1,35 @@
+.schedule-content {
+  overflow-y: auto;
+  max-height: 400px; /* Ajusta este valor según el tamaño de tu tabla */
+  position: relative;
+}
+
+.schedule-content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.schedule-content thead {
+  position: sticky;
+  top: 0;
+  background: #00EAC8; /* Color de fondo del encabezado */
+  color: black; /* Color del texto del encabezado */
+  z-index: 1;
+}
+
+.schedule-content thead th {
+  position: sticky;
+  top: 0;
+  background: #00EAC8; /* Color de fondo del encabezado */
+  color: black !important; /* Color del texto del encabezado */
+  z-index: 1;
+}
+
+.schedule-content th, .schedule-content td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.schedule-total {
+  margin-top: 20px;
+}
